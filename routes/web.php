@@ -26,3 +26,11 @@ Route::get('/blog/create', 'BlogController@create')->name('blog.create');
 Route::post('/blog/store', 'BlogController@store')->name('blog.store');
 
 Route::get('/blog/{id}', 'BlogController@show')->name('blog.show');
+
+Route::get('/blog/{id}/edit', 'BlogController@edit')->name('blog.edit');
+
+Route::patch('/blog/{id}/update', 'BlogController@update')->name('blog.update');
+
+Route::delete('blog/{id}/delete', 'BlogController@delete')->name('blog.delete');
+
+Route::delete('blog/{id}/trash', 'BlogController@trash')->name('blog.trash');

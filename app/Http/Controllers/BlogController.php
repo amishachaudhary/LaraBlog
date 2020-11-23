@@ -29,7 +29,7 @@ class BlogController extends Controller
         // $blog->title = $request->title;
         // $blog->body = $request->body;
         // $blog->save();
-        
+
 
         $input = $request->all();
         Blog::create($input);
@@ -40,6 +40,30 @@ class BlogController extends Controller
     {
         $blog = Blog::findOrFail($id);
         return view('blog.show', compact('blog'));
+    }
 
+    public function edit($id)
+    {
+        $blog = Blog::findOrFail($id);
+        return \view('blog.edit', \compact('blog'));
+    }
+    public function update(Request $request, $id)
+    {
+        $input = $request->all();
+        $blog = Blog::findOrFail($id);
+        $blog->update($input);
+        return redirect('blog');
+    }
+
+    public function delete($id)
+    {
+        $blog =  Blog::findOrFail($id);
+        $blog->delete();
+        return redirect('blog');
+    }
+    public function trash()
+    {
+        $deletedBlogs = Blog::onlyTrashed()->get();
+        return view('blog.trash', compact('deletedBlogs'));
     }
 }
